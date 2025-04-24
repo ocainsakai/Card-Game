@@ -88,7 +88,8 @@ namespace Systems.Inventory
         Slot GetClosest()
         {
             Slot closestSlot = null;
-            float min = ghost.GetComponent<SpriteRenderer>().bounds.extents.magnitude;
+            float min = ghost.GetComponent<SpriteRenderer>().bounds.size.magnitude;
+            Debug.Log(min);
             float closestDistance = min;
 
             //Vector2 box = ghost.GetComponent<SpriteRenderer>().bounds.size;
@@ -119,6 +120,7 @@ namespace Systems.Inventory
                     if (slot != null)
                     {
                         float dist = Vector2.Distance(center, slot.transform.position);
+                        Debug.Log(dist);
                         if (dist < closestDistance)
                         {
                             closestDistance = dist;

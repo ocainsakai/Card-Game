@@ -6,9 +6,9 @@ namespace Systems.Inventory
 {
     public class InventoryModel
     {
-        ObservableArray<Item> Items { get; }
-        InventoryData inventoryData = new InventoryData();
-        readonly int capacity;
+        protected ObservableArray<Item> Items { get; }
+        protected InventoryData inventoryData = new InventoryData();
+        protected readonly int capacity;
 
         public int Coins
         {
@@ -69,12 +69,26 @@ namespace Systems.Inventory
         public Item Get(int index) => Items[index];
         public Item Get(SerializableGuid id)
         {
+            int index = GetIndex(id);
+            if (index == -1) return null;
+            return Get(index);
+        }
+        public int GetIndex(SerializableGuid id)
+        {
             for (int i = 0; i < Items.Length; i++)
             {
                 if (Items[i].Id == id)
-                    return Items[i];
+                    return i;
             }
-            return null;
+            return -1;
+        }
+        public int IndexOf(Item item)
+        {
+            for(int i = 0; i < Items.Length; ++i)
+            {
+                if (item.Id == Items[i].Id) return i;
+            }
+            return -1;
         }
         public void Clear() => Items.Clear();
         public bool Add(Item item) => Items.TryAdd(item);

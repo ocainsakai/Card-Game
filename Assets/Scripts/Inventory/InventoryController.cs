@@ -43,6 +43,7 @@ namespace Systems.Inventory
             //view.OnCrossDrop += HandleCrossDrop;
             model.OnModelChanged += HandleModelChanged;
 
+            
             RefreshView();
         }
 
@@ -51,12 +52,12 @@ namespace Systems.Inventory
         public void AddCoins(int amount) => model.AddCoins(amount);
         void HandleDrop(Slot originalSlot, Slot closestSlot)
         {
-            var src = model.Get(originalSlot.Index);
-            var target = model.Get(closestSlot.Index);
+            //var src = model.Get(originalSlot.Index);
+            //var target = model.Get(closestSlot.Index);
             // Moving to Same Slot or Empty Slot
             if (originalSlot.ItemId == closestSlot.ItemId || closestSlot.ItemId.Equals(SerializableGuid.Empty))
             {
-                model.Swap(originalSlot.Index, closestSlot.Index);
+                Swap(originalSlot.Index, closestSlot.Index);
                 return;
             }
             // Moving to Non-Empty Slot
@@ -71,21 +72,47 @@ namespace Systems.Inventory
             }
             else
             {
-                model.Swap(originalSlot.Index, closestSlot.Index);
+                Swap(originalSlot.Index, closestSlot.Index);
             }
 
            
-                // TODO Cross Inventory drops
+            // TODO Cross Inventory drops
 
             // TODO world drops
 
             // TODO Hotbar drops
+            //RefreshModel();
         }
         void HandleModelChanged(IList<Item> items) => RefreshView();
+        void Swap(int src, int target)
+        {
+            var srcItem = model.Get(src);
+            var targetItem = model.Get(target);
+            if (srcItem == null || srcItem.Id.Equals(SerializableGuid.Empty))
+            {
+                view.Slots[target].Set(SerializableGuid.Empty, null);
+            }
+            else
+            {
+                view.Slots[target].Set(srcItem.Id, srcItem.details.Icon, srcItem.quantity);
+            }
+            if (targetItem == null || targetItem.Id.Equals(SerializableGuid.Empty))
+            {
+                view.Slots[src].Set(SerializableGuid.Empty, null);
+            }
+            else
+            {
+                view.Slots[src].Set(targetItem.Id, targetItem.details.Icon, targetItem.quantity);
+            }
+            //RefreshModel();
+            model.Swap(src, target);
+        }
+        
         void RefreshView()
         {
             for (int i = 0; i < capacity; i++)
             {
+                
                 var item = model.Get(i);
                 if (item == null || item.Id.Equals(SerializableGuid.Empty))
                 {
@@ -95,6 +122,14 @@ namespace Systems.Inventory
                 {
                     view.Slots[i].Set(item.Id, item.details.Icon, item.quantity);
                 }
+            }
+        }
+        void RefreshModel()
+        {
+            for (int i = 0;i < capacity; i++)
+            {
+                var target = model.GetIndex(view.Slots[i].ItemId);
+                model.Swap(i, target);
             }
         }
 

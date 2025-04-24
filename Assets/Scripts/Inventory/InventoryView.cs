@@ -38,5 +38,9 @@ namespace Systems.Inventory
             //});
             yield return null;
         }
+        public void Swap(Slot scr, Slot target)
+        {
+
+        }
     }
 }
