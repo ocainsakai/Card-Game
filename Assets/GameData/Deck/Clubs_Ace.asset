@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff57c6648cd2e1544b15e311472e2915, type: 3}
+  m_Name: Clubs_Ace
+  m_EditorClassIdentifier: 
+  Name: Ace Of Clubs
+  maxStack: 1
+  Id:
+    Part1: 3853959747
+    Part2: 1293369667
+    Part3: 3674748598
+    Part4: 4103068083
+  Icon: {fileID: -8560974306437214865, guid: a4cbe694fe556fd428d78f37d6948b43, type: 3}
+  Description: 
+  Rank: 14
+  Suit: 2
