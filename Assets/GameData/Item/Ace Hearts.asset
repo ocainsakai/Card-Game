@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d190f71b809c01541a546988c6604433, type: 3}
+  m_Name: Ace Hearts
+  m_EditorClassIdentifier: 
+  Name: Ace Of Hearts
+  maxStack: 1
+  Id:
+    Part1: 496799374
+    Part2: 1083245055
+    Part3: 1064626309
+    Part4: 3621060868
+  Icon: {fileID: 2341942813186752578, guid: a4cbe694fe556fd428d78f37d6948b43, type: 3}
+  Description: 
